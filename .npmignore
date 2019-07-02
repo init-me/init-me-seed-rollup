@@ -1,0 +1,7 @@
+node_modules/
+**/.rpt2_cache/
+.git/
+__frag/
+*.log
+.vscode 
+**/node_modules/
