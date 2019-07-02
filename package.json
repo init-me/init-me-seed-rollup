@@ -1,0 +1,27 @@
+{
+  "name": "init-me-seed-rollup",
+  "version": "0.1.0",
+  "description": "rollup seed for init-me",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackness1208/init-me-seed-rollup.git"
+  },
+  "keywords": [
+    "rollup",
+    "seed",
+    "init-me"
+  ],
+  "author": "jackness",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackness1208/init-me-seed-rollup/issues"
+  },
+  "homepage": "https://github.com/jackness1208/init-me-seed-rollup#readme",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
