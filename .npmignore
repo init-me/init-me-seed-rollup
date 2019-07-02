@@ -3,5 +3,6 @@ node_modules/
 .git/
 __frag/
 *.log
-.vscode 
+.vscode
+test/
 **/node_modules/
