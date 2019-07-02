@@ -1,6 +1,7 @@
 const seed = require('../index');
 const path = require('path');
 const fs = require('fs');
+
 it('usage test', () => {
   expect(seed.name).not.toEqual('');
   expect(seed.seeds.length > 0).toEqual(true);

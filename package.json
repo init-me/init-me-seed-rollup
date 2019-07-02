@@ -1,8 +1,9 @@
 {
   "name": "init-me-seed-rollup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "rollup seed for init-me",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest ./test/test.js"
   },
