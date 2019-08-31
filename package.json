@@ -1,6 +1,6 @@
 {
   "name": "init-me-seed-rollup",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "rollup seed for init-me",
   "main": "index.js",
   "types": "index.d.ts",
@@ -23,6 +23,10 @@
   },
   "homepage": "https://github.com/jackness1208/init-me-seed-rollup#readme",
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "yyl-fs": "^0.3.2"
+  },
+  "dependencies": {
+    "inquirer": "^7.0.0"
   }
 }

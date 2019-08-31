@@ -1,20 +1,21 @@
 const seed = require('../index');
 const path = require('path');
-const fs = require('fs');
+const extFs = require('yyl-fs');
 
-it('usage test', () => {
-  expect(seed.name).not.toEqual('');
-  expect(seed.seeds.length > 0).toEqual(true);
-  seed.seeds.forEach((item) => {
-    expect(item.name).not.toEqual('');
-    const iPath = path.join(__dirname, '../', item.path);
-    expect(fs.existsSync(iPath)).toEqual(true);
-    if (item.rename) {
-      expect(typeof item.rename).toEqual('object');
-      Object.keys(item.rename).forEach((key) => {
-        const renamePath = path.join(iPath, key);
-        expect(fs.existsSync(renamePath)).toEqual(true);
-      });
-    }
+it('hooks test', async() => {
+  const SEED_PATH = path.join(__dirname, '../seeds');
+  const FRAG_PATH = path.join(__dirname, '../__frag');
+
+  await seed.hooks.beforeStart({env: {type: 'typescript'}});
+  expect(seed.path).toEqual(path.join(SEED_PATH, 'typescript'));
+
+  const fileMap = {};
+  const files = await extFs.readFilePaths(seed.path);
+  files.forEach((iPath) => {
+    fileMap[iPath] = [path.resolve(FRAG_PATH, path.relative(seed.path, iPath))];
   });
+
+  const rMap = await seed.hooks.beforeCopy({ fileMap, targetPath: FRAG_PATH});
+  expect(rMap[path.join(seed.path, 'gitignore')]).toEqual([path.join(FRAG_PATH, '.gitignore')]);
+  expect(rMap[path.join(seed.path, 'npmignore')]).toEqual([path.join(FRAG_PATH, '.npmignore')]);
 });
