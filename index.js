@@ -1,10 +1,14 @@
 const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
+const extOs = require('yyl-os');
+const print = require('yyl-print');
 
 const lang = {
-  QUEATION_SELECT_TYPE: '请选择构建方式:',
-  TYPE_ERROR: 'env.type 不存在:'
+  QUEATION_SELECT_TYPE: '请选择构建方式',
+  TYPE_ERROR: 'env.type 不存在',
+  INSTALL_START: '正在安装依赖',
+  INSTALL_FINISHED: '安装依赖完成'
 };
 
 const SEED_PATH = path.join(__dirname, 'seeds');
@@ -26,6 +30,8 @@ const config = {
         } else {
           throw new Error(`${lang.TYPE_ERROR}: ${env.type}`);
         }
+      } else if (types.length === 1) {
+        iType = types[0];
       } else {
         const r = await inquirer.prompt([{
           type: 'list',
@@ -48,6 +54,18 @@ const config = {
         path.join(targetPath, '.npmignore')
       ];
       return Promise.resolve(fileMap);
+    },
+    async afterCopy({ targetPath }) {
+      const installPath = [
+        path.join(targetPath),
+        path.join(targetPath, 'test/case/base')
+      ]
+      print.log.info(lang.INSTALL_START)
+
+      await extOs.runCMD(`npm i`, installPath[0]);
+      await extOs.runCMD(`npm i`, installPath[1]);
+
+      print.log.success(lang.INSTALL_FINISHED)
     }
   },
   path: './seeds'

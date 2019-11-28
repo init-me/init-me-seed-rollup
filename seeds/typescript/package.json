@@ -6,7 +6,7 @@
     "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
     "w": "rollup --watch --config ./rollup.config.js",
     "prepublish": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
-    "test": "yyl watch --proxy --config ./test/yyl.config.js"
+    "test": "cd ./test/case/base && npm run d"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
