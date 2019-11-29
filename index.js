@@ -64,6 +64,7 @@ const config = {
 
       await extOs.runCMD(`npm i`, installPath[0]);
       await extOs.runCMD(`npm i`, installPath[1]);
+      await extOs.runSpawn(`npm init`, installPath[0]);
 
       print.log.success(lang.INSTALL_FINISHED)
     }
