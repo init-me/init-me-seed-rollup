@@ -60,12 +60,11 @@ const config = {
         path.join(targetPath),
         path.join(targetPath, 'test/case/base')
       ]
-      print.log.info(lang.INSTALL_START)
-
-      await extOs.runCMD(`npm i`, installPath[0]);
-      await extOs.runCMD(`npm i`, installPath[1]);
       await extOs.runSpawn(`npm init`, installPath[0]);
 
+      print.log.info(lang.INSTALL_START)
+      await extOs.runCMD(`npm i`, installPath[0]);
+      await extOs.runCMD(`npm i`, installPath[1]);
       print.log.success(lang.INSTALL_FINISHED)
     }
   },
