@@ -26,7 +26,8 @@ const config = {
     jsDest: path.join(__dirname, 'dist/assets/js'),
     htmlDest: path.join(__dirname, 'dist/'),
     cssDest: path.join(__dirname, 'dist/assets/css'),
-    imagesDest: path.join(__dirname, 'dist/assets/images')
+    imagesDest: path.join(__dirname, 'dist/assets/images'),
+    '~r': path.join(__dirname, '../../../output')
   },
   dest: {
     basePath: '/'
