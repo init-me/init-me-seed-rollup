@@ -1,15 +1,36 @@
 {
+  "version": "0.1.0",
   "main": "output/index.js",
   "types": "output/index.d.ts",
+  "eslintConfig": {
+    "env": {
+      "jest": true
+    },
+    "extends": [
+      "standard"
+    ]
+  },
+  "eslintIgnore": [
+    "/node_modules",
+    "/output",
+    "/test"
+  ],
   "scripts": {
     "dev": "rollup --config ./rollup.config.js",
     "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
     "w": "rollup --watch --config ./rollup.config.js",
     "prepublish": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
-    "test": "cd ./test/case/base && npm run d"
+    "test": "cd ./test/case/base && npm run d",
+    "eslint": "eslint ./"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "rollup": "^1.9.0",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-json": "^4.0.0",

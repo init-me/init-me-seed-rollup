@@ -1,11 +1,24 @@
 {
   "name": "init-me-seed-rollup",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "rollup seed for init-me",
   "main": "index.js",
   "types": "index.d.ts",
+  "eslintConfig": {
+    "env": {
+      "jest": true
+    },
+    "extends": [
+      "standard"
+    ]
+  },
+  "eslintIgnore": [
+    "/node_modules",
+    "/seeds"
+  ],
   "scripts": {
-    "test": "jest ./test/test.js"
+    "test": "jest ./test/test.js",
+    "eslint": "eslint ./"
   },
   "repository": {
     "type": "git",
@@ -23,6 +36,12 @@
   },
   "homepage": "https://github.com/jackness1208/init-me-seed-rollup#readme",
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "jest": "^24.8.0",
     "yyl-fs": "^0.3.2"
   },

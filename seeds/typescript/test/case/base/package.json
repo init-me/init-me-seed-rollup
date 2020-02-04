@@ -2,6 +2,18 @@
   "name": "test-case-base",
   "version": "0.1.0",
   "main": "index.js",
+  "eslintConfig": {
+    "env": {
+      "jest": true
+    },
+    "extends": [
+      "standard"
+    ]
+  },
+  "eslintIgnore": [
+    "./node_modules",
+    "./dist"
+  ],
   "scripts": {
     "all": "webpack",
     "watch": "webpack --watch",
