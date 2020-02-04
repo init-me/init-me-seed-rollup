@@ -1,9 +1,9 @@
-import pkg from './package.json';
-import typescript from 'rollup-plugin-typescript2';
-import commonjs from 'rollup-plugin-commonjs';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import json from 'rollup-plugin-json';
-import { uglify } from 'rollup-plugin-uglify';
+import pkg from './package.json'
+import typescript from 'rollup-plugin-typescript2'
+import commonjs from 'rollup-plugin-commonjs'
+import nodeResolve from 'rollup-plugin-node-resolve'
+import json from 'rollup-plugin-json'
+import { uglify } from 'rollup-plugin-uglify'
 
 const banner = [
   '/*!',
@@ -11,7 +11,7 @@ const banner = [
   ` * (c) 2019 - ${new Date().getFullYear()} jackness`,
   ' * Released under the MIT License.',
   ' */'
-].join('\n');
+].join('\n')
 
 export default {
   input: './src/index.ts',
@@ -22,7 +22,7 @@ export default {
     exports: 'named'
   }],
   plugins: [
-    nodeResolve({jsnext: true}),
+    nodeResolve({ jsnext: true }),
     commonjs(),
     json(),
     typescript({
@@ -30,4 +30,4 @@ export default {
     }),
     (process.env.NODE_ENV === 'production' && uglify())
   ]
-};
+}

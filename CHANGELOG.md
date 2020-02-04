@@ -1,4 +1,6 @@
 # 更新日志
+## 0.3.4(2020-02-04)
+* feat: 将 eslintrc 整合到 package.json 文件里面
 ## 0.3.3(2019-11-29)
 * feat: 补充 test-case eslint
 
