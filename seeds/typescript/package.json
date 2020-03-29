@@ -17,6 +17,7 @@
   ],
   "scripts": {
     "dev": "rollup --config ./rollup.config.js",
+    "d": "rollup --config ./rollup.config.js",
     "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
     "w": "rollup --watch --config ./rollup.config.js",
     "prepublish": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
@@ -37,6 +38,8 @@
     "rollup-plugin-node-resolve": "^4.2.1",
     "rollup-plugin-typescript2": "^0.20.1",
     "rollup-plugin-uglify": "^6.0.2",
-    "typescript": "^3.4.2"
+    "tslib": "^1.11.1",
+    "tslint": "^6.1.0",
+    "typescript": "3.8.3"
   }
 }
