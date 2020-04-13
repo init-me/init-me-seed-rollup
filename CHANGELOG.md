@@ -1,4 +1,8 @@
 # 更新日志
+## 0.4.0(2020-04-13)
+* feat: 接入 `eslint-config-yyl-react` 配置
+* feat: 调整初始化模型
+
 ## 0.3.5 (2020-03-29)
 * feat: 更新 seed 包 ts 版本
 

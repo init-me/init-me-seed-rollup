@@ -3,31 +3,64 @@ import typescript from 'rollup-plugin-typescript2'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import json from 'rollup-plugin-json'
-import { uglify } from 'rollup-plugin-uglify'
+import { terser } from 'rollup-plugin-terser'
 
-const banner = [
-  '/*!',
-  ` * then-ajax v${pkg.version}`,
-  ` * (c) 2019 - ${new Date().getFullYear()} jackness`,
-  ' * Released under the MIT License.',
-  ' */'
-].join('\n')
+function buildBanner (type) {
+  return [
+    '/*!',
+    ` * __data('name') ${type} ${pkg.version}`,
+    ` * (c) 2020 - ${new Date().getFullYear()} jackness`,
+    ' * Released under the MIT License.',
+    ' */'
+  ].join('\n')
+}
 
-export default {
+const IS_PUBLISH = process.env.NODE_ENV === 'production'
+
+const config = {
   input: './src/index.ts',
-  output: [{
-    file: './output/index.js',
-    format: 'cjs',
-    banner: banner,
-    exports: 'named'
-  }],
+  output: [],
   plugins: [
     nodeResolve({ jsnext: true }),
     commonjs(),
     json(),
     typescript({
       typescript: require('typescript')
-    }),
-    (process.env.NODE_ENV === 'production' && uglify())
-  ]
+    })
+  ],
+  external: ['@yy/allblue-qiankun', 'fetch-polyfill']
 }
+
+export default [{
+  input: config.input,
+  output: [{
+    file: './output/index.js',
+    format: 'cjs',
+    banner: buildBanner('cjs'),
+    exports: 'named',
+    sourcemap: true
+  }],
+  plugins: config.plugins.concat([
+    IS_PUBLISH && terser({
+      compress: {
+        passes: 2
+      }
+    })
+  ]),
+  external: config.external
+}, {
+  input: config.input,
+  output: [{
+    file: './output/index.esm.js',
+    format: 'esm',
+    banner: buildBanner('esm'),
+    sourcemap: true
+  }],
+  plugins: config.plugins.concat([
+    IS_PUBLISH && terser({
+      ecma: 6,
+      module: true
+    })
+  ]),
+  external: config.external
+}]

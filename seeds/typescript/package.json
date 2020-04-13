@@ -1,13 +1,20 @@
 {
   "version": "0.1.0",
   "main": "output/index.js",
+  "module": "output/index.esm.js",
   "types": "output/index.d.ts",
+  "files": [
+    "output"
+  ],
+  "ignore": [
+    "test"
+  ],
   "eslintConfig": {
     "env": {
       "jest": true
     },
     "extends": [
-      "standard"
+      "yyl-react"
     ]
   },
   "eslintIgnore": [
@@ -15,31 +22,38 @@
     "/output",
     "/test"
   ],
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "parser": "typescript",
+    "quoteProps": "consistent",
+    "trailingComma": "none",
+    "printWidth": 100
+  },
   "scripts": {
+    "eslint": "eslint --ext=jsx,ts,tsx ./",
+    "prettier": "prettier --write ./**/*.{ts,tsx,js}",
     "dev": "rollup --config ./rollup.config.js",
     "d": "rollup --config ./rollup.config.js",
     "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
     "w": "rollup --watch --config ./rollup.config.js",
-    "prepublish": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
-    "test": "cd ./test/case/base && npm run d",
-    "eslint": "eslint ./"
+    "release": "yyr",
+    "prepublishOnly": "npm run prettier & npm run build", 
+    "test": "cd ./test/case/base && npm run d"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
+    "eslint-config-yyl-react": "^0.1.6",
+    "prettier": "^2.0.4",
     "rollup": "^1.9.0",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^4.2.1",
+    "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-typescript2": "^0.20.1",
-    "rollup-plugin-uglify": "^6.0.2",
-    "tslib": "^1.11.1",
-    "tslint": "^6.1.0",
-    "typescript": "3.8.3"
+    "typescript": "^3.8.3",
+    "yyl-release": "0.1.0"
   }
 }

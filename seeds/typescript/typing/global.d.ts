@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    [key: string]: any;
+    [key: string]: any
   }
 }
-export = global;
+export = global
