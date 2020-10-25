@@ -8,7 +8,7 @@ import { terser } from 'rollup-plugin-terser'
 function buildBanner(type) {
   return [
     '/*!',
-    ` * __data('name') ${type} ${pkg.version}`,
+    ` * ${pkg.name} ${type} ${pkg.version}`,
     ` * (c) 2020 - ${new Date().getFullYear()} jackness`,
     ' * Released under the MIT License.',
     ' */'
