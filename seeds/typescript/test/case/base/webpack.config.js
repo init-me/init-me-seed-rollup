@@ -9,7 +9,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 const extOs = require('yyl-os')
 
-
 const util = require('yyl-util')
 
 // + setting
@@ -19,14 +18,14 @@ const config = {
     homePage: 'http://127.0.0.1:5000/'
   },
   alias: {
-    dirname: __dirname,
-    root: path.join(__dirname, 'dist'),
-    srcRoot: path.join(__dirname, 'src'),
+    'dirname': __dirname,
+    'root': path.join(__dirname, 'dist'),
+    'srcRoot': path.join(__dirname, 'src'),
 
-    jsDest: path.join(__dirname, 'dist/assets/js'),
-    htmlDest: path.join(__dirname, 'dist/'),
-    cssDest: path.join(__dirname, 'dist/assets/css'),
-    imagesDest: path.join(__dirname, 'dist/assets/images'),
+    'jsDest': path.join(__dirname, 'dist/assets/js'),
+    'htmlDest': path.join(__dirname, 'dist/'),
+    'cssDest': path.join(__dirname, 'dist/assets/css'),
+    'imagesDest': path.join(__dirname, 'dist/assets/images'),
     '~r': path.join(__dirname, '../../../output')
   },
   dest: {
@@ -89,91 +88,90 @@ const wConfig = {
     chunkFilename: 'async_component/[name]-[chunkhash:8].js',
     publicPath: util.path.join(
       config.dest.basePath,
-      path.relative(
-        config.alias.root,
-        config.alias.jsDest
-      ),
+      path.relative(config.alias.root, config.alias.jsDest),
       '/'
     )
   },
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      exclude: (file) => (
-        /node_modules/.test(file) &&
-        !/\.vue\.js/.test(file)
-      ),
-      use: (() => {
-        const loaders = [{
-          loader: 'babel-loader',
-          query: (() => {
-            if (!config.babelrc) {
-              return {
-                babelrc: false,
-                cacheDirectory: true
-              }
-            } else {
-              return {}
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: (file) => /node_modules/.test(file) && !/\.vue\.js/.test(file),
+        use: (() => {
+          const loaders = [
+            {
+              loader: 'babel-loader',
+              query: (() => {
+                if (!config.babelrc) {
+                  return {
+                    babelrc: false,
+                    cacheDirectory: true
+                  }
+                } else {
+                  return {}
+                }
+              })()
             }
-          })()
-        }]
+          ]
 
-        return loaders
-      })()
-    }, {
-      test: /\.html$/,
-      use: [{
-        loader: 'html-loader'
-      }]
-    }, {
-      test: /\.pug$/,
-      oneOf: [{
-        use: ['pug-loader']
-      }]
-    }, {
-      test: /\.(png|jpg|gif)$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 1,
-          name: '[name]-[hash:8].[ext]',
-          chunkFilename: 'async_component/[name]-[chunkhash:8].js',
-          outputPath: path.relative(
-            config.alias.jsDest,
-            config.alias.imagesDest
-          ),
-          publicPath: (function () {
-            let r = util.path.join(
-              config.dest.basePath,
-              path.relative(
-                config.alias.root,
-                config.alias.imagesDest
-              ),
-              '/'
-            )
-            return r
-          })()
+          return loaders
+        })()
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader'
+          }
+        ]
+      },
+      {
+        test: /\.pug$/,
+        oneOf: [
+          {
+            use: ['pug-loader']
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1,
+            name: '[name]-[hash:8].[ext]',
+            chunkFilename: 'async_component/[name]-[chunkhash:8].js',
+            outputPath: path.relative(config.alias.jsDest, config.alias.imagesDest),
+            publicPath: (function () {
+              let r = util.path.join(
+                config.dest.basePath,
+                path.relative(config.alias.root, config.alias.imagesDest),
+                '/'
+              )
+              return r
+            })()
+          }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {}
+          },
+          {
+            loader: 'css-loader'
+          }
+        ]
       }
-    }, {
-      test: /\.css$/,
-      use: [{
-        loader: MiniCssExtractPlugin.loader,
-        options: {}
-      }, {
-        loader: 'css-loader'
-      }]
-    }]
-  },
-  resolveLoader: {
-    modules: [
-      path.join(__dirname, 'node_modules')
     ]
   },
+  resolveLoader: {
+    modules: [path.join(__dirname, 'node_modules')]
+  },
   resolve: {
-    modules: [
-      path.join(__dirname, 'node_modules')
-    ],
+    modules: [path.join(__dirname, 'node_modules')],
     alias: config.alias
   },
   devtool: 'source-map',
@@ -204,80 +202,86 @@ const wConfig = {
 }
 
 // + html output
-wConfig.plugins = wConfig.plugins.concat((function () { // html 输出
-  const entryPath = util.path.join(config.alias.srcRoot, 'entry')
-  let outputPath = []
-  const r = []
+wConfig.plugins = wConfig.plugins.concat(
+  (function () {
+    // html 输出
+    const entryPath = util.path.join(config.alias.srcRoot, 'entry')
+    let outputPath = []
+    const r = []
 
-  if (fs.existsSync(entryPath)) {
-    outputPath = outputPath.concat(extFs.readFilesSync(entryPath, /(\.jade|\.pug|\.html)$/))
-  }
-
-  const outputMap = {}
-  const ignoreExtName = function (iPath) {
-    return iPath.replace(/(\.jade|.pug|\.html|\.js|\.css|\.ts|\.tsx|\.jsx)$/, '')
-  }
-
-  outputPath.forEach((iPath) => {
-    outputMap[ignoreExtName(iPath)] = iPath
-  })
-
-  const commonChunks = []
-  const pageChunkMap = {}
-  Object.keys(wConfig.entry).forEach((key) => {
-    let iPaths = []
-    if (util.type(wConfig.entry[key]) === 'array') {
-      iPaths = wConfig.entry[key]
-    } else if (util.type(wConfig.entry[key]) === 'string') {
-      iPaths.push(wConfig.entry[key])
+    if (fs.existsSync(entryPath)) {
+      outputPath = outputPath.concat(extFs.readFilesSync(entryPath, /(\.jade|\.pug|\.html)$/))
     }
 
-    let isPageModule = null
-    iPaths.some((iPath) => {
-      const baseName = ignoreExtName(iPath)
-      if (outputMap[baseName]) {
-        isPageModule = baseName
-        return true
-      }
-      return false
+    const outputMap = {}
+    const ignoreExtName = function (iPath) {
+      return iPath.replace(/(\.jade|.pug|\.html|\.js|\.css|\.ts|\.tsx|\.jsx)$/, '')
+    }
+
+    outputPath.forEach((iPath) => {
+      outputMap[ignoreExtName(iPath)] = iPath
     })
 
-    if (!isPageModule) {
-      commonChunks.push(key)
-    } else {
-      pageChunkMap[isPageModule] = key
-    }
-  })
-
-  outputPath.forEach((iPath) => {
-    const iBaseName = ignoreExtName(iPath)
-    const iChunkName = pageChunkMap[iBaseName]
-    const fileName = ignoreExtName(path.basename(iPath))
-    let iChunks = []
-
-    iChunks = iChunks.concat(commonChunks)
-    if (iChunkName) {
-      iChunks.push(iChunkName)
-    }
-
-    if (iChunkName) {
-      const opts = {
-        template: iPath,
-        filename: path.relative(config.alias.jsDest, path.join(config.alias.htmlDest, `${fileName}.html`)),
-        chunks: iChunks,
-        chunksSortMode (a, b) {
-          return iChunks.indexOf(a.names[0]) - iChunks.indexOf(b.names[0])
-        },
-        inlineSource: '.(js|css|ts|tsx|jsx)\\?__inline$',
-        minify: false
+    const commonChunks = []
+    const pageChunkMap = {}
+    Object.keys(wConfig.entry).forEach((key) => {
+      let iPaths = []
+      if (util.type(wConfig.entry[key]) === 'array') {
+        iPaths = wConfig.entry[key]
+      } else if (util.type(wConfig.entry[key]) === 'string') {
+        iPaths.push(wConfig.entry[key])
       }
 
-      r.push(new HtmlWebpackPlugin(opts))
-    }
-  })
+      let isPageModule = null
+      iPaths.some((iPath) => {
+        const baseName = ignoreExtName(iPath)
+        if (outputMap[baseName]) {
+          isPageModule = baseName
+          return true
+        }
+        return false
+      })
 
-  return r
-})())
+      if (!isPageModule) {
+        commonChunks.push(key)
+      } else {
+        pageChunkMap[isPageModule] = key
+      }
+    })
+
+    outputPath.forEach((iPath) => {
+      const iBaseName = ignoreExtName(iPath)
+      const iChunkName = pageChunkMap[iBaseName]
+      const fileName = ignoreExtName(path.basename(iPath))
+      let iChunks = []
+
+      iChunks = iChunks.concat(commonChunks)
+      if (iChunkName) {
+        iChunks.push(iChunkName)
+      }
+
+      if (iChunkName) {
+        const opts = {
+          template: iPath,
+          filename: path.relative(
+            config.alias.jsDest,
+            path.join(config.alias.htmlDest, `${fileName}.html`)
+          ),
+          chunks: iChunks,
+          chunksSortMode(a, b) {
+            return iChunks.indexOf(a.names[0]) - iChunks.indexOf(b.names[0])
+          },
+          inlineSource: '.(js|css|ts|tsx|jsx)\\?__inline$',
+          minify: false
+        }
+
+        r.push(new HtmlWebpackPlugin(opts))
+      }
+    })
+
+    return r
+  })()
+)
 // - html output
 
 // + dev server
@@ -288,7 +292,7 @@ wConfig.devServer = {
   hot: true,
   publicPath: config.dest.basePath,
   writeToDisk: true,
-  async after () {
+  async after() {
     if (config.proxy.homePage) {
       await extOs.openBrowser(config.proxy.homePage)
     }
