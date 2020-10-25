@@ -1,8 +1,6 @@
 function demo() {
-  console.log('hello world');
+  console.log('hello world')
 }
 
-export default demo;
-export {
-  demo
-};
+export default demo
+export { demo }

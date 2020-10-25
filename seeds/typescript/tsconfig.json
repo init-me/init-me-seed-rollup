@@ -5,16 +5,9 @@
     "module": "ES2015",
     "strict": true,
     "esModuleInterop": true,
-    "lib": [
-      "dom",
-      "es2015",
-      "scripthost"
-    ],
+    "lib": ["dom", "es2015", "scripthost"],
     "declarationDir": "./output",
     "declaration": true
   },
-  "include": [
-    "typing/**/*",
-    "src/**.*"
-  ]
+  "include": ["typing/**/*", "src/**.*"]
 }

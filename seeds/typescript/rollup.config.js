@@ -5,10 +5,10 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import json from 'rollup-plugin-json'
 import { terser } from 'rollup-plugin-terser'
 
-function buildBanner (type) {
+function buildBanner(type) {
   return [
     '/*!',
-    ` * __data('name') ${type} ${pkg.version}`,
+    ` * ${pkg.name} ${type} ${pkg.version}`,
     ` * (c) 2020 - ${new Date().getFullYear()} jackness`,
     ' * Released under the MIT License.',
     ' */'
@@ -31,36 +31,39 @@ const config = {
   external: ['@yy/allblue-qiankun', 'fetch-polyfill']
 }
 
-export default [{
-  input: config.input,
-  output: [{
-    file: './output/index.js',
-    format: 'cjs',
-    banner: buildBanner('cjs'),
-    exports: 'named',
-    sourcemap: true
-  }],
-  plugins: config.plugins.concat([
-    IS_PUBLISH && terser({
-      compress: {
-        passes: 2
+export default [
+  {
+    input: config.input,
+    output: [
+      {
+        file: './output/index.js',
+        format: 'cjs',
+        banner: buildBanner('cjs'),
+        exports: 'named',
+        sourcemap: false
       }
-    })
-  ]),
-  external: config.external
-}, {
-  input: config.input,
-  output: [{
-    file: './output/index.esm.js',
-    format: 'esm',
-    banner: buildBanner('esm'),
-    sourcemap: true
-  }],
-  plugins: config.plugins.concat([
-    IS_PUBLISH && terser({
-      ecma: 6,
-      module: true
-    })
-  ]),
-  external: config.external
-}]
+    ],
+    plugins: config.plugins.concat([
+      IS_PUBLISH &&
+        terser({
+          compress: {
+            passes: 2
+          }
+        })
+    ]),
+    external: config.external
+  },
+  {
+    input: config.input,
+    output: [
+      {
+        file: './output/index.esm.js',
+        format: 'esm',
+        banner: buildBanner('esm'),
+        sourcemap: false
+      }
+    ],
+    plugins: config.plugins,
+    external: config.external
+  }
+]

@@ -23,17 +23,17 @@
     "/test"
   ],
   "prettier": {
+    "tabWidth": 2,
     "semi": false,
     "singleQuote": true,
     "jsxSingleQuote": true,
-    "parser": "typescript",
     "quoteProps": "consistent",
     "trailingComma": "none",
     "printWidth": 100
   },
   "scripts": {
     "eslint": "eslint --ext=jsx,ts,tsx ./",
-    "prettier": "prettier --write ./**/*.{ts,tsx,js}",
+    "prettier": "prettier --write ./**",
     "dev": "rollup --config ./rollup.config.js",
     "d": "rollup --config ./rollup.config.js",
     "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
@@ -45,7 +45,7 @@
   "devDependencies": {
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
-    "eslint-config-yyl-react": "^0.1.6",
+    "eslint-config-yyl-react": "^0.1.9",
     "prettier": "^2.0.4",
     "rollup": "^1.9.0",
     "rollup-plugin-commonjs": "^9.3.4",
