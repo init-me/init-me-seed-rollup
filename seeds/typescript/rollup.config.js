@@ -38,7 +38,7 @@ export default [{
     format: 'cjs',
     banner: buildBanner('cjs'),
     exports: 'named',
-    sourcemap: true
+    sourcemap: false
   }],
   plugins: config.plugins.concat([
     IS_PUBLISH && terser({
@@ -54,13 +54,8 @@ export default [{
     file: './output/index.esm.js',
     format: 'esm',
     banner: buildBanner('esm'),
-    sourcemap: true
+    sourcemap: false
   }],
-  plugins: config.plugins.concat([
-    IS_PUBLISH && terser({
-      ecma: 6,
-      module: true
-    })
-  ]),
+  plugins: config.plugins,
   external: config.external
 }]
