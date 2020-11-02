@@ -3,12 +3,6 @@
   "main": "output/index.js",
   "module": "output/index.esm.js",
   "types": "output/index.d.ts",
-  "files": [
-    "output"
-  ],
-  "ignore": [
-    "test"
-  ],
   "eslintConfig": {
     "env": {
       "jest": true
