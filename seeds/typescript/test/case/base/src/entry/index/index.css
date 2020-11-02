@@ -8,18 +8,12 @@ body {
   background: #d0d0d0;
   text-align: center;
 }
-body::before {
-  content: '';
-  width: 0;
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle;
-}
 .dm-box {
   display: inline-block;
   background: #fff;
   padding: 50px 80px;
   vertical-align: middle;
+  margin: 50px auto;
   border-radius: 5px;
 }
 .dm-title {
