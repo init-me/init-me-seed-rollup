@@ -71,7 +71,7 @@ const wConfig = {
     var entryPath = path.join(iSrcRoot, 'entry')
 
     if (fs.existsSync(entryPath)) {
-      var fileList = extFs.readFilesSync(entryPath, /\.(js|tsx?)$/)
+      var fileList = extFs.readFilesSync(entryPath, /\.(jsx?|tsx?)$/)
       fileList.forEach((str) => {
         var key = path.basename(str).replace(/\.[^.]+$/, '')
         if (key) {
@@ -105,7 +105,8 @@ const wConfig = {
                 if (!config.babelrc) {
                   return {
                     babelrc: false,
-                    cacheDirectory: true
+                    cacheDirectory: true,
+                    presets: ['@babel/preset-react']
                   }
                 } else {
                   return {}

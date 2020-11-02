@@ -1,4 +1,6 @@
 # 更新日志
+## 0.4.5 (2020-11-02)
+* feat: 调整 test-case 让支持 jsx
 ## 0.4.4 (2020-10-25)
 * fix: 修复 执行 npm run build 时 comments 不能正确显示组件名称问题
 
