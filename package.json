@@ -1,6 +1,6 @@
 {
   "name": "init-me-seed-rollup",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "rollup seed for init-me",
   "main": "index.js",
   "types": "index.d.ts",

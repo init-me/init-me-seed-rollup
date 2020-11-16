@@ -1,8 +1,10 @@
 **/js/lib/**
+.rpt2_cache/**
 dist/**
 **/dist/**
 output/**
 node_modules/**
+**/node_modules/**
 *.yml
 .gitignore
 .prettierignore
