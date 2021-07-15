@@ -4,6 +4,10 @@ import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import json from 'rollup-plugin-json'
 import { terser } from 'rollup-plugin-terser'
+import postcss from 'rollup-plugin-postcss'
+import autoprefixer from 'autoprefixer'
+import postcssReporter from 'postcss-reporter'
+import sass from 'sass'
 
 function buildBanner(type) {
   return [
@@ -21,7 +25,25 @@ const config = {
   input: './src/index.ts',
   output: [],
   plugins: [
-    nodeResolve({ jsnext: true }),
+    postcss({
+      extract: true,
+      extensions: ['css', 'scss'],
+      process(context, payload) {
+        return new Promise((resolve, reject) => {
+          sass.render({
+            file: context
+          }, (err, result) => {
+            if (!err) {
+              resolve(result)
+            } else {
+              reject(err)
+            }
+          })
+        })
+      },
+      plugins: [autoprefixer(), postcssReporter()]
+    }),
+    nodeResolve({ mainFields: ['jsnext:main'] }),
     commonjs(),
     json(),
     typescript({
