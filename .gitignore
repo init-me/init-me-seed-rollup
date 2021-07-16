@@ -5,3 +5,5 @@ __committest/
 __frag/
 .vscode
 .rpt2_cache/
+
+.DS_Store
