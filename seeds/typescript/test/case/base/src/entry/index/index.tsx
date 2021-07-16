@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { toast } from '@/index'
+import {} from '@/index'
 import logoIcon from './images/logo.png'
 import './index.css'
 
