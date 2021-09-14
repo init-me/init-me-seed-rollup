@@ -1,7 +1,8 @@
-node_modules/*
-**/node_modules/*
+node_modules/
+**/node_modules/
 .bin/
-dist/*
+dist/
+output/
 .sass-cache/
 .idea/
 config.mine.js
