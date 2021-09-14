@@ -5,6 +5,7 @@ dist/**
 output/**
 node_modules/**
 **/node_modules/**
+**/*.json
 *.yml
 .gitignore
 .prettierignore
@@ -22,3 +23,7 @@ package-lock.json
 **/*.sh
 **/*.conf
 *.log
+*.yml
+*.md
+*.scss
+*.css
