@@ -1,0 +1,100 @@
+{
+  "name": "__data(name)",
+  "version": "0.41.2",
+  "description": "h5service parser",
+  "main": "./output/index.js",
+  "module": "./output/index.esm.js",
+  "types": "./output/index.d.ts",
+  "maintainers": [
+    {
+      "name": "liudaojie",
+      "emial": "liudaojie@yy.com"
+    }
+  ],
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "mocha": true
+    },
+    "globals": {
+      "swan": true
+    },
+    "extends": [
+      "yyl-react"
+    ],
+    "rules": {
+      "camelcase": 0
+    }
+  },
+  "eslintIgnore": [
+    "/node_modules",
+    "/output",
+    "/test"
+  ],
+  "prettier": {
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "quoteProps": "consistent",
+    "trailingComma": "none",
+    "printWidth": 100
+  },
+  "scripts": {
+    "eslint": "eslint --ext=jsx,ts,tsx ./",
+    "prettier": "prettier --write ./**",
+    "dev": "rollup --config ./rollup.config.js",
+    "d": "rollup --config ./rollup.config.js",
+    "build": "cross-env NODE_ENV=production rollup --config ./rollup.config.js",
+    "w": "rollup --watch --config ./rollup.config.js",
+    "clear": "rimraf ./output",
+    "release": "yyr",
+    "prepublishOnly": "npm run prettier & npm run build", 
+    "test": "cd ./test/case/base && npm run d",
+    "install:test": "cd ./test/case/base && yarn install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.yy.com/opensource/FEteam/public/h5service-parser.git"
+  },
+  "author": "jackness",
+  "license": "ISC",
+  "peerDependencies": {
+    "@yy/h5service-yy-sdk": ">=1.4.9"
+  },
+  "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-replace": "^2.3.4",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "chai": "^4.3.4",
+    "cross-env": "^5.2.0",
+    "eslint": "7.25.0",
+    "eslint-config-yyl-react": "1.0.3",
+    "prettier": "^2.0.4",
+    "rollup": "^1.9.3",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^4.2.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "rollup-plugin-web-worker-loader": "^1.6.1",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@types/long": "^4.0.1",
+    "@types/xmldom": "^0.1.31",
+    "@yy/h5service-parser-enum": "^0.41.1",
+    "@yy/h5service-parser-formatter": "^0.41.1",
+    "@yy/h5service-yy-sdk": "1.4.21",
+    "@yy/swan-types": "0.1.0",
+    "axios": "^0.22.0",
+    "event-subscribe": "^1.7.2",
+    "long": "^4.0.0",
+    "protobufjs": "^6.11.2",
+    "xmldom": "^0.6.0"
+  },
+  "gitHead": "6e63df37409af4868e207ec3c99e2c300728cf62"
+}
