@@ -8,3 +8,5 @@ output/
 config.mine.js
 build/
 .rpt2_cache/
+.DS_Store
+**/.DS_Store
