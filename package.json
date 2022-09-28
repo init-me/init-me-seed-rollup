@@ -4,6 +4,7 @@
   "description": "rollup seed for init-me",
   "main": "index.js",
   "types": "index.d.ts",
+  "maintainers": ["jackness1208", "liudaojie"],
   "eslintConfig": {
     "env": {
       "jest": true
