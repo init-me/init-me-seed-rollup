@@ -66,12 +66,10 @@ const config = {
 
       print.log.info(lang.INSTALL_START)
       await extOs.runCMD('yarn install', installPath[0])
-      await extOs.runCMD('yarn install', installPath[1])
+      if (fs.existsSync(installPath[1])) {
+        await extOs.runCMD('yarn install', installPath[1])
+      }
       print.log.success(lang.INSTALL_FINISHED)
-
-      print.log.info(lang.INSTALL_TEST_START)
-      await extOs.runCMD('npm i', installPath[1])
-      print.log.info(lang.INSTALL_TEST_FINISHED)
     }
   },
   path: './seeds'
