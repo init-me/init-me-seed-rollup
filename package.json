@@ -4,7 +4,10 @@
   "description": "rollup seed for init-me",
   "main": "index.js",
   "types": "index.d.ts",
-  "maintainers": ["jackness1208", "liudaojie"],
+  "maintainers": [{
+    "name": "jackness1208",
+    "email": "jackness1208@qq.com"
+  }],
   "eslintConfig": {
     "env": {
       "jest": true
