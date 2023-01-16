@@ -2,8 +2,10 @@ import pkg from './package.json'
 import typescript from 'rollup-plugin-typescript2'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
-import external from 'rollup-plugin-node-externals'
+import terser from '@rollup/plugin-terser'
 import json from '@rollup/plugin-json'
+
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 function buildBanner(type) {
   return [
@@ -19,16 +21,16 @@ const config = {
   input: './src/index.ts',
   output: [],
   plugins: [
-    external({
-      deps: true
-    }),
+    // external({
+    //   deps: true
+    // }),
     nodeResolve({ jsnext: true }),
     commonjs(),
     json(),
     typescript({
       typescript: require('typescript')
     })
-  ],
+  ].concat(IS_PRODUCTION ? [terser()] : []),
   external: []
 }
 
@@ -41,6 +43,12 @@ export default [
         format: 'cjs',
         banner: buildBanner('cjs'),
         exports: 'named',
+        sourcemap: false
+      },
+      {
+        file: './output/index.mjs',
+        format: 'esm',
+        banner: buildBanner('esm'),
         sourcemap: false
       }
     ],
