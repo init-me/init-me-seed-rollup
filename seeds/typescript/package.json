@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "main": "output/index.js",
-  "module": "output/index.mjs",
+  "module": "output/index.esm.js",
   "types": "output/index.d.ts",
   "files": ["output"],
   "eslintConfig": {
